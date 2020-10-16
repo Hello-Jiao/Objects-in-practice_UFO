@@ -15,6 +15,11 @@ function setup()
         width: 150,
         height: 50,
         num_lights: 10,
+        brightnesses:[]
+    }
+
+    for(var i = 0; i < flying_saucer.num_lights; i++){
+        flying_saucer.brightnesses.push((i * 20)%255);
     }
 }
 
@@ -49,14 +54,26 @@ function draw()
         flying_saucer.height/2,
         0,PI);
     
-
-    flying_saucer.x += random(-2,2);
-    flying_saucer.x += random(-1,1);
-
+     //draw the lights
     var incr = flying_saucer.width/(flying_saucer.num_lights -1);
 
     for(var i = 0; i < flying_saucer.num_lights; i++){
-        fill(255);
-        ellipse(flying_saucer.x - flying_saucer.width/2 + incr * i, flying_saucer.y, 5);
+        
+        var x = flying_saucer.x - flying_saucer.width/2 + i * incr;
+        fill(flying_saucer.brightnesses[i]);
+        ellipse(
+            x,
+            flying_saucer.y,
+            5,
+            5
+        )
+        flying_saucer.brightnesses[i] += 2;
+        if(flying_saucer.brightnesses[i] > 255)
+        {
+            flying_saucer.brightnesses[i] = 100;
+        }
     }
+
+    flying_saucer.x += random(-1,1);
+    flying_saucer.x += random(-1,1);
 }
