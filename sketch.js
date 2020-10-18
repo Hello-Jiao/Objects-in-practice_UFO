@@ -14,7 +14,7 @@ function setup()
 
     for(var i = 0; i < 5; i++)
     {
-        flying_saucers.push(new Flying_saucer(100 + i * 150,100));
+        flying_saucers.push(new Flying_saucer(100 + i * 150,floor(random(100,200))));
     }
 }
 
