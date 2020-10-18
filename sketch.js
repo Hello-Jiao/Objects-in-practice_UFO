@@ -2,13 +2,20 @@
 //Object orientation revisted
 //part one
 var flying_saucer;
+var flying_saucers;
 
 function setup()
 {
     createCanvas(800,600);
     noStroke();
 
-    flying_saucer = new Flying_saucer;
+    
+    flying_saucers = [];
+
+    for(var i = 0; i < 5; i++)
+    {
+        flying_saucers.push(new Flying_saucer(100 + i * 150,100));
+    }
 }
 
 function draw()
@@ -19,35 +26,32 @@ function draw()
     fill(0,50,0);
     rect(0,height - 100, width, 100);
 
-    
-    if(flying_saucer.beam_on == true)
+    for ( var i = 0; i < flying_saucers.length; i++)
     {
-        flying_saucer.beam();
+        flying_saucers[i].draw();
+        flying_saucers[i].hover();
     }
-
-    flying_saucer.draw();
-    flying_saucer.hover();
 }
 
-function keyPressed()
-{
-    flying_saucer.beam_on = true;
-}
+// function keyPressed()
+// {
+//     flying_saucer.beam_on = true;
+// }
 
-function keyReleased()
-{
-    flying_saucer.beam_on = false;
-}
+// function keyReleased()
+// {
+//     flying_saucer.beam_on = false;
+// }
 
-function Flying_saucer () {
-    this.x = 200;
-    this.y = 100;
-    this.width = 150;
-    this.height = 50;  
-    this.window_width = 0.75;
-    this.window_height = 0.85;
-    this.base_height = 0.45;
-    this.num_lights = 10;
+function Flying_saucer (x,y) {
+    this.x = x;
+    this.y = y;
+    this.width = random(150,250);
+    this.height = random(75,125);  
+    this.window_width = random(0.5, 0.85);
+    this.window_height = random(0.75, 1);
+    this.base_height = random(0.25, 0.5);
+    this.num_lights = round(random(10,20));
     this.brightnesses =[];
     this.beam_on = false;
 
@@ -55,10 +59,43 @@ this.hover = function()
 {
     this.x += random(-1,1);
     this.y += random(-1,1);
+
+    if(this.beamOn && random() > 0.996)
+    {
+        this.beamOn = false;
+    }
+    else if(!this.beamOn && random() > 0.99)
+    {
+        this.beamOn = true;
+    }
+},
+
+this.beam = function()
+{
+
+
+
+    fill(255,255,0,120);
+
+    if(random() > 0.2)
+    {
+    beginShape();
+    vertex(this.x - this.width * 0.25, this.y );
+    vertex(this.x + this.width * 0.25, this.y );
+    vertex(this.x + this.width * 0.55, height - 100 );
+    vertex(this.x - this.width * 0.55, height - 100 );
+    endShape();
+    }
 },
 
 this.draw = function()
 {
+
+    if(this.beamOn)
+    {
+        this.beam();
+    }
+
     //draw the flying saucer
     fill(175,238,238);
     arc(
@@ -104,20 +141,7 @@ this.draw = function()
     }
 }
 
-this.beam = function()
-{
-    fill(255,255,0,120);
 
-    if(random() > 0.2)
-    {
-    beginShape();
-    vertex(this.x - this.width * 0.25, this.y );
-    vertex(this.x + this.width * 0.25, this.y );
-    vertex(this.x + this.width * 0.55, height - 100 );
-    vertex(this.x - this.width * 0.55, height - 100 );
-    endShape(CLOSE);
-    }
-}
 for(var i = 0; i < this.num_lights; i++){
     this.brightnesses.push((i * 20)%255);
     }
