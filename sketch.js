@@ -20,6 +20,7 @@ function setup()
         base_height: 0.45,
         num_lights: 10,
         brightnesses:[],
+        beam_on: false,
 
         hover: function()
         {
@@ -32,7 +33,7 @@ function setup()
         {
             fill(255,255,0,120);
 
-            if(random() > 0.65)
+            if(random() > 0.2)
             {
             beginShape();
             vertex(this.x - this.width * 0.25, this.y );
@@ -40,7 +41,7 @@ function setup()
             vertex(this.x + this.width * 0.55, height - 100 );
             vertex(this.x - this.width * 0.55, height - 100 );
             endShape(CLOSE);
-        }
+            }
         }
     }
 
@@ -57,7 +58,11 @@ function draw()
     fill(0,50,0);
     rect(0,height - 100, width, 100);
     
-    flying_saucer.beam();
+    if( flying_saucer.beam_on == true)
+    {
+        flying_saucer.beam();
+    }
+    
     
     //draw the flying saucer
     fill(175,238,238);
@@ -104,6 +109,14 @@ function draw()
             flying_saucer.brightnesses[i] = 100;
         }
     }
+}
 
+function keyPressed()
+{
+    flying_saucer.beam_on = true;
+}
 
+function keyReleased()
+{
+    flying_saucer.beam_on = false;
 }
