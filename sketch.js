@@ -23,7 +23,21 @@ function setup()
 
         hover: function()
         {
-            console.log("hover")
+            console.log("hover");
+            this.x += random(-1,1);
+            this.y += random(-1,1);
+        },
+
+        beam: function()
+        {
+            fill(255,255,0,130);
+
+            beginShape();
+            vertex(this.x - this.width * 0.25, this.y );
+            vertex(this.x + this.width * 0.25, this.y );
+            vertex(this.x + this.width, height - 100 );
+            vertex(this.x - this.width, height - 100 );
+            endShape(close);
         }
     }
 
@@ -64,6 +78,7 @@ function draw()
         0,PI);
 
         flying_saucer.hover();
+        flying_saucer.beam();
     
      //draw the lights
     var incr = flying_saucer.width/(flying_saucer.num_lights -1);
@@ -85,6 +100,5 @@ function draw()
         }
     }
 
-    flying_saucer.x += random(-1,1);
-    flying_saucer.x += random(-1,1);
+
 }
