@@ -46,10 +46,10 @@ function draw()
 function Flying_saucer (x,y) {
     this.x = x;
     this.y = y;
-    this.width = random(150,250);
-    this.height = random(75,125);  
+    this.width = random(100,200);
+    this.height = random(60,120);  
     this.window_width = random(0.5, 0.85);
-    this.window_height = random(0.75, 1);
+    this.window_height = random(0.65, 1);
     this.base_height = random(0.25, 0.5);
     this.num_lights = round(random(10,20));
     this.brightnesses =[];
