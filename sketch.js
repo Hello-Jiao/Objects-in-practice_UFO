@@ -30,14 +30,17 @@ function setup()
 
         beam: function()
         {
-            fill(255,255,0,130);
+            fill(255,255,0,120);
 
+            if(random() > 0.65)
+            {
             beginShape();
             vertex(this.x - this.width * 0.25, this.y );
             vertex(this.x + this.width * 0.25, this.y );
-            vertex(this.x + this.width, height - 100 );
-            vertex(this.x - this.width, height - 100 );
-            endShape(close);
+            vertex(this.x + this.width * 0.55, height - 100 );
+            vertex(this.x - this.width * 0.55, height - 100 );
+            endShape(CLOSE);
+        }
         }
     }
 
@@ -53,6 +56,8 @@ function draw()
     //draw the ground
     fill(0,50,0);
     rect(0,height - 100, width, 100);
+    
+    flying_saucer.beam();
     
     //draw the flying saucer
     fill(175,238,238);
@@ -78,7 +83,7 @@ function draw()
         0,PI);
 
         flying_saucer.hover();
-        flying_saucer.beam();
+        
     
      //draw the lights
     var incr = flying_saucer.width/(flying_saucer.num_lights -1);
