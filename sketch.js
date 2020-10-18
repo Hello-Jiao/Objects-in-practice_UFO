@@ -1,6 +1,7 @@
 //Topic 1.1 
 //Object orientation revisted
 //part one
+var flying_saucer;
 
 function setup()
 {
@@ -14,8 +15,16 @@ function setup()
         y: 150,
         width: 150,
         height: 50,
+        window_width: 0.75,
+        window_height: 0.85,
+        base_height: 0.45,
         num_lights: 10,
-        brightnesses:[]
+        brightnesses:[],
+
+        hover: function()
+        {
+            console.log("hover")
+        }
     }
 
     for(var i = 0; i < flying_saucer.num_lights; i++){
@@ -36,23 +45,25 @@ function draw()
     arc(
         flying_saucer.x,
         flying_saucer.y,
-        flying_saucer.width/2,
-        flying_saucer.height * 2,
+        flying_saucer.width * flying_saucer.window_width,
+        flying_saucer.height * flying_saucer.window_height,
         PI,TWO_PI);
     fill(150);
     arc(
         flying_saucer.x,
         flying_saucer.y,
         flying_saucer.width,
-        flying_saucer.height,
+        flying_saucer.height/2,
         PI,TWO_PI);
     fill(50);
     arc(
         flying_saucer.x,
         flying_saucer.y,
         flying_saucer.width,
-        flying_saucer.height/2,
+        flying_saucer.height * flying_saucer.base_height,
         0,PI);
+
+        flying_saucer.hover();
     
      //draw the lights
     var incr = flying_saucer.width/(flying_saucer.num_lights -1);
